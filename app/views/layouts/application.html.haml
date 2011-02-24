@@ -1,0 +1,22 @@
+!!! XML
+!!!
+%html
+    %head
+        %title BalNews
+            = yield :title
+        = stylesheet_link_tag :all
+        = yield :head
+        = csrf_meta_tag
+    %body
+        - if flash[:error]
+            - if flash[:error].is_a?(Array)
+                #error
+                    Error:
+                    %ul
+                        - flash[:error].each do |e|
+                            %li= e
+            - else
+                #error= flash[:error]
+        - if flash[:notice]
+            #notice= flash[:notice]
+        = yield
