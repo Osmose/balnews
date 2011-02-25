@@ -2,21 +2,39 @@
 !!!
 %html
     %head
-        %title BalNews
+        %title 
+            Balnews
             = yield :title
-        = stylesheet_link_tag :all
+        = stylesheet_link_tag "styles"
         = yield :head
         = csrf_meta_tag
     %body
-        - if flash[:error]
-            - if flash[:error].is_a?(Array)
-                #error
-                    Error:
-                    %ul
-                        - flash[:error].each do |e|
-                            %li= e
-            - else
-                #error= flash[:error]
-        - if flash[:notice]
-            #notice= flash[:notice]
-        = yield
+        #rootContainer
+            #header
+                #icon
+                    = image_tag("balicon.png", :id => "icon")
+                #name 
+                    = link_to("BalNews", root_path)
+                #nav
+                    = link_to("new", new_post_path)
+                    |
+                    = link_to("balwiki", "http://www.balwiki.com")
+                #userInfo
+                    - if user_signed_in?
+                        = current_user.name
+                    - else
+                        = link_to("login", new_user_session_path)
+                .clear
+            #content
+                - if flash[:error]
+                    - if flash[:error].is_a?(Array)
+                        #error
+                            Error:
+                            %ul
+                                - flash[:error].each do |e|
+                                    %li= e
+                    - else
+                        #error= flash[:error]
+                - if flash[:notice]
+                    #notice= flash[:notice]
+                = yield
