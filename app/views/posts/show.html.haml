@@ -1,0 +1,8 @@
+= render @post
+- if user_signed_in?
+    = form_for(@comment) do |f|
+        = f.hidden_field :parent_id
+        = f.label :body, "Comment"
+        = f.text_area :body
+        = f.submit
+        

@@ -1,0 +1,5 @@
+%ol
+    - @posts.each do |post|
+        %li= render post
+        
+= will_paginate @posts
