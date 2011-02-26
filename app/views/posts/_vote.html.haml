@@ -1,0 +1,12 @@
+- if post.user != current_user
+    .vote
+        .up
+            - if !current_user.nil? && post.user_vote(current_user) == :up
+                = image_tag("uparrow_orange.png")
+            - else
+                = upvote_path(image_tag("uparrow_grey.png"), post)
+        .down
+            - if !current_user.nil? && post.user_vote(current_user) == :down
+                = image_tag("downarrow_orange.png")
+            - else
+                = downvote_path(image_tag("downarrow_grey.png"), post)

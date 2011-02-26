@@ -1,0 +1,15 @@
+.comment
+    .smInfo
+        by #{comment.user.name} 
+        %abbr{:class => "timeago", :title => comment.created_at.iso8601}= comment.created_at.rfc2822
+        | #{link_to("link", comment)}
+    .content
+        :markdown
+            #{comment.body}
+            
+    - if !commentPage
+        .reply
+            = link_to("reply", comment)
+        %ul.comments
+            - comment.children.each do |c|
+                %li= render :partial => "comment", :object => c, :locals => {:commentPage => false}
