@@ -16,6 +16,29 @@ class PostsController < ApplicationController
         end
     end
     
+    def vote
+        post = Post.find(params[:id])
+        vote = Vote.where(:user_id => current_user.id, :post_id => post.id).first
+        
+        if (post.user == current_user)
+            redirect_to(:back)
+        end
+        
+        if (vote.nil?)
+            vote = Vote.new
+            vote.user = current_user
+            vote.post = post
+        end
+        
+        vote.up = params[:type] == "up"
+        
+        if vote.save
+            redirect_to(:back)
+        else
+            redirect_to(:back, :error => "Vote failed")
+        end
+    end
+    
     def show
         @post = Post.find(params[:id])
         

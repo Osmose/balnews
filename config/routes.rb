@@ -1,7 +1,8 @@
 Balnews::Application.routes.draw do
   devise_for :users
   resources :posts
-
+  
+  match "vote/:id/:type" => "posts#vote"
   root :to => "posts#index"
 
   # The priority is based upon order of creation:

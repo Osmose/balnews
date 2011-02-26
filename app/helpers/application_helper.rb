@@ -1,5 +1,4 @@
 module ApplicationHelper
-
     def discuss_link(post)
         count = post.comment_count
         
@@ -12,4 +11,11 @@ module ApplicationHelper
         end
     end
 
+    def upvote_path(content, post)
+        link_to(content, "vote/#{post.id}/up")
+    end
+    
+    def downvote_path(content, post)
+        link_to(content, "vote/#{post.id}/down")
+    end
 end

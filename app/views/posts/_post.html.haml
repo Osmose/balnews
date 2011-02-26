@@ -1,3 +1,4 @@
+= render :partial => "vote", :locals => {:post => post}
 .postBlurb
     .title
         - if post.link?
@@ -6,7 +7,7 @@
         - else
             = link_to(post.title, post)
     .smInfo
-        %span.author by #{post.user.name}
+        #{post.votes} points by #{post.user.name}
         %abbr{:class => "timeago", :title => post.created_at.iso8601}= post.created_at.rfc2822
         - if frontPage
             |

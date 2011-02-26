@@ -197,3 +197,8 @@ html, body {
 ul.comments {
   list-style-type: none;
   margin: 12px 0; }
+
+.vote {
+  float: left;
+  margin-top: 6px;
+  margin-right: 4px; }

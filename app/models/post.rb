@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
     belongs_to :user
     belongs_to :parent, :class_name => "Post"
     has_many :children, :class_name => "Post", :foreign_key => "parent_id"
+    has_many :votes
     
     def is_comment?
         not parent.nil?
@@ -23,6 +24,22 @@ class Post < ActiveRecord::Base
         end
         
         count
+    end
+    
+    def votes
+        1 + Vote.where(:post_id => self.id, :up => true).count - Vote.where(:post_id => self.id, :up => false).count
+    end
+    
+    def user_vote(user)
+        vote = Vote.where(:user_id => user.id, :post_id => self.id).first
+    
+        if vote.nil?
+            nil
+        elsif vote.up
+            :up
+        else
+            :down
+        end
     end
     
     def domain
