@@ -1,4 +1,5 @@
 require "uri"
+include ActionController::UrlWriter
 
 class Post < ActiveRecord::Base
     validates :title, :presence => true,
@@ -7,9 +8,21 @@ class Post < ActiveRecord::Base
 
     belongs_to :user
     belongs_to :parent, :class_name => "Post"
+    has_many :children, :class_name => "Post", :foreign_key => "parent_id"
     
     def is_comment?
         not parent.nil?
+    end
+    
+    def comment_count
+        count = children.length
+        if count > 0
+            children.each do |c|
+                count = count + c.comment_count
+            end
+        end
+        
+        count
     end
     
     def domain

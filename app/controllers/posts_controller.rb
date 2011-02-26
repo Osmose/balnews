@@ -3,7 +3,10 @@ class PostsController < ApplicationController
     
     def index
         @posts = Post.paginate(
-            :page => params[:page], 
+            :page => params[:page],
+            :conditions => {
+                :parent_id => nil
+            },
             :order => "created_at DESC"
         )
         
@@ -15,6 +18,7 @@ class PostsController < ApplicationController
     
     def show
         @post = Post.find(params[:id])
+        
         @comment = Post.new
         @comment.parent = @post
         
@@ -41,9 +45,13 @@ class PostsController < ApplicationController
         @post.user = current_user
 
         if @post.save
-            redirect_to(@post, :notice => 'Post was successfully created.')
+            if !@post.parent.nil?
+                redirect_to(@post.parent)
+            else
+                redirect_to(@post, :notice => 'Post was successfully created.')
+            end
         else
-            render :action => "new"
+            redirect_to :back, :error => "Error saving post."
         end
     end
     

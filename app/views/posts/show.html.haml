@@ -1,8 +1,17 @@
-= render @post
+- if @post.is_comment?
+    = render :partial => "comment", :object => @post, :locals => {:commentPage => true}
+- else
+    = render :partial => "post", :object => @post, :locals => {:frontPage => false}
+    
 - if user_signed_in?
     = form_for(@comment) do |f|
         = f.hidden_field :parent_id
-        = f.label :body, "Comment"
-        = f.text_area :body
-        = f.submit
+        %p
+            = f.label :body, "Comment"
+            %br/
+            = f.text_area :body, :size => "60x6"
+        %p
+            = f.submit
+            
+= render :partial => "comment", :collection => @post.children, :locals => {:commentPage => false}
         

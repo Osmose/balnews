@@ -46,7 +46,8 @@ module Balnews
     config.action_view.javascript_expansions[:defaults] = [
         "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
         "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js",
-        "rails.js"
+        "rails.js",
+        "jquery.timeago.js"
     ]
   end
 end

@@ -130,6 +130,9 @@ a {
 a.underline {
   text-decoration: underline; }
 
+p {
+  margin-bottom: 12px; }
+
 html, body {
   height: 100%; }
 
@@ -167,10 +170,30 @@ html, body {
   padding-left: 14px;
   padding-right: 14px; }
 
+.smInfo {
+  color: #828282;
+  font-size: 10px; }
+  .smInfo a {
+    color: #828282; }
+    .smInfo a:hover {
+      text-decoration: underline; }
+
 .postBlurb {
-  padding: 8px; }
+  padding: 4px; }
   .postBlurb .title {
     font-size: 14px; }
     .postBlurb .title .domain {
       color: #828282;
       font-size: 10px; }
+  .postBlurb .body {
+    color: #828282;
+    padding-top: 8px; }
+
+.comment .reply {
+  font-size: 10px; }
+  .comment .reply a {
+    text-decoration: underline; }
+
+ul.comments {
+  list-style-type: none;
+  margin: 12px 0; }

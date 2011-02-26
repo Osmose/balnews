@@ -1,5 +1,5 @@
 %ol
     - @posts.each do |post|
-        %li= render post
+        %li= render :partial => "post", :object => post, :locals => {:frontPage => true}
         
 = will_paginate @posts

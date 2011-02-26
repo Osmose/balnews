@@ -16,9 +16,9 @@
                 #name 
                     = link_to("BalNews", root_path)
                 #nav
-                    = link_to("new", new_post_path)
-                    |
                     = link_to("balwiki", "http://www.balwiki.com")
+                    |
+                    = link_to("submit", new_post_path)
                 #userInfo
                     - if user_signed_in?
                         = current_user.name
@@ -38,3 +38,4 @@
                 - if flash[:notice]
                     #notice= flash[:notice]
                 = yield
+        = javascript_include_tag :defaults

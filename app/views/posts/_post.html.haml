@@ -1,5 +1,17 @@
 .postBlurb
     .title
-        = link_to(@post.title, @post.link)
-        %span.domain= "(" + @post.domain + ")"
-    
+        - if post.link?
+            = link_to(post.title, post.link)
+            %span.domain (#{post.domain})
+        - else
+            = link_to(post.title, post)
+    .smInfo
+        %span.author by #{post.user.name}
+        %abbr{:class => "timeago", :title => post.created_at.iso8601}= post.created_at.rfc2822
+        - if frontPage
+            |
+            = discuss_link(post)
+    - if !frontPage && !post.link? && post.body?
+        .body
+            :markdown
+                #{post.body}
